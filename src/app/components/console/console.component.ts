@@ -31,7 +31,7 @@ interface Config {
 })
 export class ConsoleComponent implements OnInit, OnDestroy {
 
-    private static readonly webcamRefreshIntervalMs: number = 15000;
+    private static readonly webcamRefreshIntervalMs: number = 60000;
 
     public temperatureConfig: Config = {
         property: 'outTemp',
