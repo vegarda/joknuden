@@ -9,9 +9,9 @@ import { RequestPromise } from 'src/app/utils/promise';
 import { TimeService } from 'src/app/services/time.service';
 import { filter } from 'rxjs/operators';
 
-
-
-@Injectable()
+@Injectable({
+    providedIn: 'root',
+})
 export class ArchiveChartsService {
 
     private _archiveData$: BehaviorSubject<ArchiveData[]> = new BehaviorSubject([]);

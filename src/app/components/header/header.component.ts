@@ -1,17 +1,33 @@
 import { ChangeDetectorRef, Component, ViewRef } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Route, routes } from 'src/app/models/joknuden.models';
 import { AppService } from 'src/app/services/app.service';
 import { RoutingService } from 'src/app/services/routing.service';
 import { ArchiveChartsService } from '../charts/archive-charts/archive-charts.service';
 import { WindChartsService } from '../charts/wind-charts/wind-charts.service';
 import { HiloService } from '../hilo/hilo.service';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { MatOption, MatSelect } from '@angular/material/select';
+import { FormsModule } from '@angular/forms';
+import { MatToolbar } from '@angular/material/toolbar';
+import { CommonModule } from '@angular/common';
+import { MatButton } from '@angular/material/button';
 
 
 @Component({
     selector: 'jok-header',
     templateUrl: 'header.component.html',
     styleUrls: ['header.component.scss'],
+    imports: [
+        CommonModule,
+        RouterLink, // Only import the directive, not the full module
+        FormsModule,
+        MatToolbar,
+        MatProgressSpinner,
+        MatOption,
+        MatSelect,
+        MatButton,
+    ]
 })
 export class HeaderComponent {
 

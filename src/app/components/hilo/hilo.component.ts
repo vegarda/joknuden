@@ -3,6 +3,8 @@ import { HiLo, HiLoValue } from 'src/app/models/joknuden.models';
 import { AppService } from 'src/app/services/app.service';
 import { RoutingService } from 'src/app/services/routing.service';
 import { HiloService } from './hilo.service';
+import { CommonModule } from '@angular/common';
+import { MatTableModule } from '@angular/material/table';
 
 
 
@@ -20,6 +22,10 @@ interface HiLoasdasd {
     selector: 'jok-hilo',
     templateUrl: 'hilo.component.html',
     styleUrls: ['hilo.component.scss'],
+    imports: [
+        CommonModule,
+        MatTableModule,
+    ]
 })
 export class HiloComponent {
 

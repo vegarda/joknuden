@@ -1,8 +1,12 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef, ViewRef } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { interval, Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { ConsoleService, ConsoleData } from './console.service';
+import { WindCompassComponent } from './wind-compass/wind-compass.component';
+import { WindInfoComponent } from './wind-info/wind-info.component';
+import { NumberFormatPipe } from 'src/app/pipes/number-format.pipe';
+import { CommonModule } from '@angular/common';
 
 type ConsoleDataProperty = Exclude<keyof ConsoleData, 'dateTime'>;
 
@@ -18,8 +22,16 @@ interface Config {
     selector: 'jok-console',
     templateUrl: './console.component.html',
     styleUrls: ['./console.component.scss'],
+    imports: [
+        CommonModule,
+        WindCompassComponent,
+        WindInfoComponent,
+        NumberFormatPipe,
+    ]
 })
 export class ConsoleComponent implements OnInit, OnDestroy {
+
+    private static readonly webcamRefreshIntervalMs: number = 15000;
 
     public temperatureConfig: Config = {
         property: 'outTemp',
@@ -85,6 +97,8 @@ export class ConsoleComponent implements OnInit, OnDestroy {
         return this.consoleService.data;
     }
 
+    public webcamImageUrl: string = ConsoleComponent.getWebcamImageUrl();
+
 
     private onDestroy$ = new Subject<void>();
 
@@ -99,6 +113,11 @@ export class ConsoleComponent implements OnInit, OnDestroy {
         this.consoleService.data$.pipe(takeUntil(this.onDestroy$)).subscribe(() => {
             this.detectChanges();
         });
+
+        interval(ConsoleComponent.webcamRefreshIntervalMs).pipe(takeUntil(this.onDestroy$)).subscribe(() => {
+            this.webcamImageUrl = ConsoleComponent.getWebcamImageUrl();
+            this.detectChanges();
+        });
     }
 
     public ngOnDestroy(): void {
@@ -110,6 +129,10 @@ export class ConsoleComponent implements OnInit, OnDestroy {
         if (!(this.changeDetectorRef as ViewRef).destroyed) {
             this.changeDetectorRef.detectChanges();
         }
+    }
+
+    private static getWebcamImageUrl(): string {
+        return `/still.jpg?t=${ Date.now() }`;
     }
 
 

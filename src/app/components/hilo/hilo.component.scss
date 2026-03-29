@@ -3,33 +3,42 @@
 
 }
 
-.mat-cell {
+.mat-cell,
+.mat-mdc-cell,
+.mat-header-cell,
+.mat-mdc-header-cell {
     white-space: nowrap;
 }
 
-.mat-column-label {
+.mat-column-label,
+.cdk-column-label {
 }
 
-.mat-column-average {
+.mat-column-average,
+.cdk-column-average {
     text-align: right;
     padding-left: 3em;
     padding-right: 1em;
 }
 
-.mat-column-high {
+.mat-column-high,
+.cdk-column-high {
     text-align: right;
     padding-left: 2em;
     padding-right: 1em;
 }
 
-.mat-column-highTime {
+.mat-column-highTime,
+.cdk-column-highTime {
 }
 
-.mat-column-low {
+.mat-column-low,
+.cdk-column-low {
     text-align: right;
     padding-left: 3em;
     padding-right: 1em;
 }
 
-.mat-column-lowTime {
+.mat-column-lowTime,
+.cdk-column-lowTime {
 }

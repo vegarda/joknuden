@@ -1,12 +1,23 @@
 import { Component, ViewChild } from '@angular/core';
-import { MatDrawer } from '@angular/material/sidenav';
+import { MatDrawer, MatDrawerContainer, MatDrawerContent } from '@angular/material/sidenav';
 import { Action, AppService } from './services/app.service';
 import { RoutingService } from './services/routing.service';
+import { RouterOutlet } from '@angular/router';
+// import { AppRoutingModule } from './app-routing.module';
+// import { AppModule } from './app.module';
 
 @Component({
     selector: 'jok-app',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
+    imports: [
+        RouterOutlet, // Only import the directive, not the full module
+        // AppRoutingModule, // Do not import AppRoutingModule in standalone component
+        // AppModule, // Do not import AppModule in standalone component
+        MatDrawer,
+        MatDrawerContent,
+        MatDrawerContainer,
+    ]
 })
 export class AppComponent {
 

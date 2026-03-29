@@ -31,29 +31,29 @@ import { WindChartComponent } from './components/charts/archive-charts/wind-char
 
 @NgModule({
     declarations: [
-        AppComponent,
-        MainComponent,
+        // AppComponent,
+        // MainComponent,
 
-        NumberFormatPipe,
+        // NumberFormatPipe,
 
-        ConsoleComponent,
-        WindCompassComponent,
-        WindInfoComponent,
+        // ConsoleComponent,
+        // WindCompassComponent,
+        // WindInfoComponent,
 
-        ChartComponent,
+        // ChartComponent,
 
-        TemperatureChartComponent,
-        WindChartComponent,
-        BarometerChartComponent,
+        // TemperatureChartComponent,
+        // WindChartComponent,
+        // BarometerChartComponent,
 
-        ArchiveChartsComponent,
+        // ArchiveChartsComponent,
 
-        WindChartsComponent,
+        // WindChartsComponent,
 
-        HeaderComponent,
+        // HeaderComponent,
 
-        FooterComponent,
-        HiloComponent,
+        // FooterComponent,
+        // HiloComponent,
 
     ],
     imports: [
@@ -61,7 +61,6 @@ import { WindChartComponent } from './components/charts/archive-charts/wind-char
         AppRoutingModule,
         FormsModule,
         MaterialModule,
-        BrowserAnimationsModule,
     ],
     providers: [
 
@@ -74,6 +73,5 @@ import { WindChartComponent } from './components/charts/archive-charts/wind-char
         WindChartsService,
 
     ],
-    bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -3,6 +3,7 @@ import { ChangeDetectorRef, Component, OnInit, QueryList, ViewChild, ViewChildre
 import { WindRoseData } from 'src/app/models/joknuden.models';
 import { ChartComponent } from '../chart/chart.component';
 import { WindChartsService } from './wind-charts.service';
+import { MatCard, MatCardSubtitle, MatCardTitle } from '@angular/material/card';
 
 
 
@@ -11,6 +12,12 @@ import { WindChartsService } from './wind-charts.service';
     selector: 'jok-wind-charts',
     templateUrl: 'wind-charts.component.html',
     styleUrls: ['wind-charts.component.scss'],
+    imports: [
+        MatCardSubtitle,
+        MatCardTitle,
+        MatCard,
+        ChartComponent,
+    ]
 })
 export class WindChartsComponent implements OnInit {
 

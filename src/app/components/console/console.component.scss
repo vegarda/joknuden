@@ -3,6 +3,7 @@
 :host {
     height: 10em;
     display: flex;
+    --webcam-width: 16rem;
 }
 
 .console-container {
@@ -18,6 +19,10 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+.props {
+    flex: 2 1 200%;
 }
 
 .property {
@@ -65,15 +70,47 @@ jok-wind-compass {
     max-height: 25vh;
 }
 
+.webcam {
+    flex: 0 0 var(--webcam-width);
+    align-self: stretch;
+    padding: 0.5rem 0 0.5rem 1rem;
+}
+
+.webcam-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.webcam-link {
+    width: 100%;
+    height: 100%;
+    display: block;
+    cursor: pointer;
+}
+
 
 @media screen and (max-width: 1024px) {
 
     .console-container {
         flex-direction: column;
+
+        &::before {
+            content: none;
+        }
     }
 
     .console-column {
         width: 100%;
         margin: 1em 0;
+    }
+
+    .webcam {
+        flex-basis: auto;
+        min-height: 12rem;
+        padding: 0;
     }
 }

@@ -4,12 +4,16 @@ import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Language, LanguageService } from 'src/app/services/language.service';
 import { ConsoleData } from '../console.service';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
     selector: 'jok-wind-info',
     templateUrl: './wind-info.component.html',
     styleUrls: ['./wind-info.component.scss'],
+    imports: [
+        CommonModule,
+    ]
 })
 export class WindInfoComponent {
 

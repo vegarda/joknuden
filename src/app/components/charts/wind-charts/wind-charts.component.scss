@@ -1,5 +1,4 @@
-@import "src/styles/material-colors";
-
+@use "src/styles/material-colors" as *;
 
 jok-chart {
     height: 30em;

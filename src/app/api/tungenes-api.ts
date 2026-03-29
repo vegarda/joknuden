@@ -1,10 +1,13 @@
-
+import { Injectable } from '@angular/core';
 import { ArchiveData, HiLo, TimeUnit, WindRoseData } from '../models/joknuden.models';
 import { RequestPromise } from '../utils/promise';
 import { environment } from './../../environments/environment';
 
 console.log('environment', environment);
 
+@Injectable({
+    providedIn: 'root',
+})
 export class TungenesApi {
 
     private readonly apiUrl: string;
@@ -27,6 +30,7 @@ export class TungenesApi {
         }
 
         this.apiUrl = `${ protocol }://${ hostname }:${ port }/api`;
+        this.apiUrl = `https://joknuden.no/api`;
 
         console.log(this);
 

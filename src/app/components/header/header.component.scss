@@ -1,4 +1,4 @@
-@import "src/styles/material-colors";
+@use "src/styles/material-colors" as *;
 
 :host {
     width: 100%;
