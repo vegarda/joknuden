@@ -1,7 +1,7 @@
 
 
 :host {
-    height: 10em;
+    height: 14em;
     display: flex;
     --webcam-width: 16rem;
 }
@@ -73,7 +73,6 @@ jok-wind-compass {
 .webcam {
     flex: 0 0 var(--webcam-width);
     align-self: stretch;
-    padding: 0.5rem 0 0.5rem 1rem;
 }
 
 .webcam-image {
