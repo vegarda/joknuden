@@ -1,0 +1,7 @@
+services:
+  joknuden:
+    image: vegarda/joknuden:latest
+    container_name: joknuden
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:${JOKNUDEN_HTTP_PORT:-8080}:80"
