@@ -97,10 +97,12 @@ export class ConsoleComponent implements OnInit, OnDestroy {
         return this.consoleService.data;
     }
 
-    public webcamImageUrl: string = ConsoleComponent.getWebcamImageUrl();
+    public webcamImageUrl: string | null = null;
 
 
     private onDestroy$ = new Subject<void>();
+    private webcamFetchController: AbortController | null = null;
+    private currentWebcamObjectUrl: string | null = null;
 
     constructor(
         private changeDetectorRef: ChangeDetectorRef,
@@ -114,15 +116,18 @@ export class ConsoleComponent implements OnInit, OnDestroy {
             this.detectChanges();
         });
 
+        void this.refreshWebcamImage();
+
         interval(ConsoleComponent.webcamRefreshIntervalMs).pipe(takeUntil(this.onDestroy$)).subscribe(() => {
-            this.webcamImageUrl = ConsoleComponent.getWebcamImageUrl();
-            this.detectChanges();
+            void this.refreshWebcamImage();
         });
     }
 
     public ngOnDestroy(): void {
         this.onDestroy$.next();
         this.onDestroy$.complete();
+        this.webcamFetchController?.abort();
+        this.revokeWebcamObjectUrl();
     }
 
     private detectChanges(): void {
@@ -131,7 +136,53 @@ export class ConsoleComponent implements OnInit, OnDestroy {
         }
     }
 
-    private static getWebcamImageUrl(): string {
+    private async refreshWebcamImage(): Promise<void> {
+        this.webcamFetchController?.abort();
+
+        const fetchController = new AbortController();
+        this.webcamFetchController = fetchController;
+
+        try {
+            const response = await fetch(ConsoleComponent.getWebcamImageRequestUrl(), {
+                cache: 'no-store',
+                signal: fetchController.signal,
+            });
+
+            if (!response.ok) {
+                throw new Error(`Webcam image request failed with status ${ response.status }.`);
+            }
+
+            const imageBlob = await response.blob();
+
+            if (fetchController.signal.aborted) {
+                return;
+            }
+
+            const nextWebcamObjectUrl = URL.createObjectURL(imageBlob);
+
+            this.revokeWebcamObjectUrl();
+            this.currentWebcamObjectUrl = nextWebcamObjectUrl;
+            this.webcamImageUrl = nextWebcamObjectUrl;
+            this.detectChanges();
+        } catch (error: unknown) {
+            if (!fetchController.signal.aborted) {
+                console.error('Failed to refresh webcam image.', error);
+            }
+        } finally {
+            if (this.webcamFetchController === fetchController) {
+                this.webcamFetchController = null;
+            }
+        }
+    }
+
+    private revokeWebcamObjectUrl(): void {
+        if (this.currentWebcamObjectUrl) {
+            URL.revokeObjectURL(this.currentWebcamObjectUrl);
+            this.currentWebcamObjectUrl = null;
+        }
+    }
+
+    private static getWebcamImageRequestUrl(): string {
         return `/still.jpg?t=${ Date.now() }`;
     }
 

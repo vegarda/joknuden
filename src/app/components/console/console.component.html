@@ -55,8 +55,8 @@
         <jok-wind-info [consoleData]="_data" class="console-column"></jok-wind-info>
 
         <div class="webcam console-column">
-            <a class="webcam-link" [href]="webcamImageUrl" target="_blank" rel="noopener noreferrer">
-                <img class="webcam-image" [src]="webcamImageUrl" alt="Webcam" />
+            <a *ngIf="webcamImageUrl as webcamUrl" class="webcam-link" [href]="webcamUrl" target="_blank" rel="noopener noreferrer">
+                <img class="webcam-image" [src]="webcamUrl" alt="Webcam" />
             </a>
         </div>
 
