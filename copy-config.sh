@@ -1,5 +1,10 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
+set -euo pipefail
+
+FILE_NAME="$(basename "$0")"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+echo "Running ${FILE_NAME} from ${SCRIPT_DIR}"
 
 DOMAIN_NAME="joknuden.no";
 
