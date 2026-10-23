@@ -1,4 +1,4 @@
-FROM node:16 AS build
+FROM node:lts AS build
 
 WORKDIR /usr/src/app
 
@@ -14,8 +14,6 @@ RUN ls -lah
 
 RUN npm run build
 
-#FROM nginx:alpine
-#FROM nginx:stable-alpine
 FROM nginx:mainline-alpine
 
 COPY --from=build /usr/src/app/dist /usr/share/nginx/html
